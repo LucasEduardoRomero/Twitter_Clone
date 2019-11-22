@@ -1,0 +1,16 @@
+{
+    "name":"miniframework",    
+    "require":{
+        "php":">=7.0"
+    },
+    "authors":[{
+        "name":"Lucas Eduardo Romero",
+        "email":"lucasromero.cba@hotmail.com"
+    }],
+    "autoload":{
+        "psr-4":{
+            "App\\":"App/",
+            "MF\\":"vendor/MF/"
+        }
+    }
+}

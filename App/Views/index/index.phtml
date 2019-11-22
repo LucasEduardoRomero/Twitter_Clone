@@ -1,0 +1,14 @@
+<h1>Index</h1>
+<hr />
+
+<?php 
+  foreach($this->view->dados as $chave => $produto){
+    echo "Produto: ".$produto['descricao'].
+    "<br/>ID: ".$produto['id'].
+    "<br/>Preço: ".$produto['preco']."<br/><br/>";
+  }
+  //echo "<pre>";   
+  //print_r($this->view->dados);
+  //echo "</pre>";
+  
+?>
