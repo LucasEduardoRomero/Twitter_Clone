@@ -23,7 +23,8 @@ class User extends Model{
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
-    //Retorna verdadeiro se o registro é um usuário valido a se cadastrar ou falso caso não seja.
+    //Retorna verdadeiro se o registro é um usuário valido a se cadastrar
+    // ou falso caso não seja.
     public function validateRegister(){
         $validate = true;
         if( strlen($this->name) < 3 || strlen($this->email) < 8 || strlen($this->password) < 6 ){
@@ -40,6 +41,16 @@ class User extends Model{
         $stmt->bindvalue(":senha",$this->__get('password'));
         $stmt->execute();
         return $this;        
+    }
+    public function authUser(){
+        $query = "SELECT id,nome,email
+        FROM users
+        WHERE email = (:email) AND senha = (:senha)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(":email",$this->__get('email'));
+        $stmt->bindValue(":senha",$this->__get('password'));
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_OBJ);
     }
     public function editUser(){}
     public function removeUser(){}

@@ -21,6 +21,11 @@ class Route extends Bootstrap{
             'controller' => 'indexController',
             'action'     => 'register'
         );
+        $routes['auth'] = array(
+            'route'      => '/auth',
+            'controller' => 'AuthController',
+            'action'     => 'auth'
+        );
 
         $this->setRoutes($routes);
     }
