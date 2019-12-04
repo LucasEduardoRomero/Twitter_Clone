@@ -5,30 +5,51 @@ namespace App\Controllers;
 use MF\Controller\Action;
 use MF\Model\Container;
 
-
-//use App\Connection;
-use App\Models\Produto;
-use App\Models\Info;
 class IndexController extends Action{
     
-    public function index(){
-//
-  //      $conn = Connection::getDb();
-    //  $produto = new Produto($conn);
-        
-        $produto = Container::getModel('Produto');
-        $this->view->dados = $produto->getProdutos();
-    
-        $this->render('index','layout1');
-    }
-    public function sobreNos(){   
-      //  $conn = Connection::getDb();
-    //    $info = new Info($conn);      
-        $info = Container::getModel('Info');    
-        $this->view->dados = $info->getInfo(); 
+  public function index(){
+    $this->render('index');
+  } 
+  public function inscreverse(){
+    $this->view->statusCadastro = 0; 
+    $this->view->usuario = array(
+      'name' => "",
+      'email' => "",
+      'password' => ""
+    );
+    $this->render('inscreverse');
+  }   
+  public function register(){
 
-        $this->render('sobreNos','layout2');          
-    }
+    $usuario = Container::getModel('User');
+    $usuario->__set('name',$_POST['user_name']);
+    $usuario->__set('email',$_POST['user_email']);
+    $usuario->__set('password',$_POST['user_password']);
+    if($usuario->validateRegister()){
+      if(count($usuario->getUserByEmail()) == 0){
+        $usuario->saveUser();  
+        $this->render('cadastro');
+      }else{
+        $this->view->statusCadastro = 2; //CODIGO 2 = EMAIL JA CADASTRADO   
+        $this->view->usuario = array(
+          'name' => $_POST['user_name'],
+          'email' => $_POST['user_email'],
+          'password' => $_POST['user_password']
+        );
+        $this->render('inscreverse');
+      }      
+    }else{        
+        $this->view->statusCadastro = 1; //CODIGO 1 = CAMPOS INVALIDOS
+        $this->view->usuario = array(
+          'name' => $_POST['user_name'],
+          'email' => $_POST['user_email'],
+          'password' => $_POST['user_password']
+        );
+        $this->render('inscreverse');
+        
+    }  
+      
    
+  }  
 }
 ?>

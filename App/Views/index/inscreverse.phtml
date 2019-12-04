@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card" style="width: 36rem;">
+      <div class="card-body">
+
+        <div class="d-flex justify-content-center">
+          <img src="/img/twitter_logo.png" />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h2>Crie sua conta</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            
+            <form action="/register" method="post">
+              <div class="form-group">
+                <input value="<?= $this->view->usuario['name'] ?>" name="user_name" type="text" class="form-control" placeholder="Nome">
+              </div>
+              
+              <div class="form-group">
+                <input value="<?= $this->view->usuario['email'] ?>" name="user_email" type="text" class="form-control" placeholder="E-mail">
+              </div>
+
+              <div class="form-group">
+                <input value="<?= $this->view->usuario['password'] ?>" name="user_password" type="password" class="form-control" placeholder="Senha">
+              </div>
+              
+              <div class="mt-4 mb-4">
+                <small class="form-text">
+                  Ao inscrever-se, você concorda com os Termos de Serviço e com as Políticas de Privacidade, incluindo o Uso de Cookies. Outras pessoas poderão encontrar você pelo e-mail ou número de telefone fornecido · Opções de Privacidade
+                </small>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Inscrever-se</button>
+            
+<?php if($this->view->statusCadastro == 1){ ?>            
+              <small class="form-text text-danger">Erro ao preencher os campos. Insira os dados novamente.</small>
+<?php }elseif($this->view->statusCadastro == 2){ ?>
+              <small class="form-text text-danger">Este E-mail já está cadastrado. Por favor, Insira outro endereço de E-mail.</small>
+<?php } ?>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+  
