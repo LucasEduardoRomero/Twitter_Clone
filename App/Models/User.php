@@ -43,14 +43,21 @@ class User extends Model{
         return $this;        
     }
     public function authUser(){
+
         $query = "SELECT id,nome,email
         FROM users
         WHERE email = (:email) AND senha = (:senha)";
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(":email",$this->__get('email'));
         $stmt->bindValue(":senha",$this->__get('password'));
-        $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_OBJ);
+        $stmt->execute();  
+        $user = $stmt->fetch(\PDO::FETCH_OBJ);          
+        if($user != '' && $user->id != '' && $user->nome != '' && $user->email != ''){
+            $this->__set('id',$user->id);
+            $this->__set('name',$user->nome);
+        }
+        return $this;
+
     }
     public function editUser(){}
     public function removeUser(){}

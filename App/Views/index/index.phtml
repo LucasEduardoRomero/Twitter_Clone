@@ -27,12 +27,23 @@
 					<input name = "login_email" type="text" class="form-control" placeholder="E-mail">
 				</div>
 				<div class="col">
-					<input name = "login_password" type="text" class="form-control" placeholder="Senha">
+					<input name = "login_password" type="password" class="form-control" placeholder="Senha">
 				</div>
 				<div class="col-auto">
 					<button type="submit" class="btn btn-primary mb-2">Entrar</button>
+				</div>				
+			</div>
+<?php
+			if($this->view->statusLogin != ''){
+?>
+			<div class="row">
+				<div class="col">
+					<span class="text text-danger">*E-mail e/ou Senha Inválidos!</span>
 				</div>
 			</div>
+<?php 	
+			}
+?>
 		</form>
 
 		<div class="row pt-5 pl-5 pr-5">

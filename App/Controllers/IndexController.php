@@ -8,6 +8,7 @@ use MF\Model\Container;
 class IndexController extends Action{
     
   public function index(){
+    $this->view->statusLogin = isset($_GET['statusLogin']) ? $_GET['statusLogin'] : '' ;
     $this->render('index');
   } 
   public function inscreverse(){
@@ -24,7 +25,8 @@ class IndexController extends Action{
     $usuario = Container::getModel('User');
     $usuario->__set('name',$_POST['user_name']);
     $usuario->__set('email',$_POST['user_email']);
-    $usuario->__set('password',$_POST['user_password']);
+    $usuario->__set('password',md5($_POST['user_password']));
+
     if($usuario->validateRegister()){
       if(count($usuario->getUserByEmail()) == 0){
         $usuario->saveUser();  
